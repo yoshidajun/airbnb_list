@@ -1,0 +1,19 @@
+<h1><%= "#{@city_name}: #{@in_date.strftime('%m/%d')} to #{@out_date.strftime('%m/%d')}" %></h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <% @date_property_list.keys.each do |date| %>
+      <th><%= date.strftime('%m/%d') %></th>
+    <% end %>
+  </tr>
+
+<% @properties.each do |property| %>
+  <tr>
+    <td><%= link_to property.name, "https://www.airbnb.com/rooms/#{property.aid}" %></td>
+    <% @date_property_list.keys.each do |date| %>
+      <th><%= @date_property_list[date].key?(property.id) ? 'X' : '' %></th>
+    <% end %>
+  </tr>
+<% end %>
+</table>

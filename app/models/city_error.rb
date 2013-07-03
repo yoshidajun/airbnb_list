@@ -1,0 +1,2 @@
+class CityError < StandardError
+end

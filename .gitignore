@@ -1,2 +1,26 @@
-*~
+.rs*~
 *.bak
+*.bak
+*.bin
+*.bmp
+/*.png
+*.xml
+test.*
+.DS_Store
+# .rvmrc should be system dependent
+.rvmrc
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/log/Rack*
+/log/*.stderr
+/log/*.stdout
+/log/android_log_archived/
+/tmp
+*.sqlite3-journal
+
+# RubyMine
+/.idea
