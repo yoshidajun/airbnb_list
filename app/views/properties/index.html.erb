@@ -1,3 +1,5 @@
+<% # TODO(yjun): DRY for date format -%>
+
 <h1><%= "#{@city_name}: #{@in_date.strftime('%m/%d')} to #{@out_date.strftime('%m/%d')}" %></h1>
 
 <table border="1">
@@ -12,6 +14,7 @@
   <tr>
     <td><%= link_to property.name, "https://www.airbnb.com/rooms/#{property.aid}" %></td>
     <% @date_property_list.keys.each do |date| %>
+      <% # TODO(yjun): VacancyList class to simplify this. -%>
       <th><%= @date_property_list[date].key?(property.id) ? '' : 'X' %></th>
     <% end %>
   </tr>

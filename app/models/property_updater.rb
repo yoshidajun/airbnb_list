@@ -2,6 +2,20 @@ require 'open-uri'
 require 'json'
 require 'pp'
 
+# TODO(yjun):
+# * remove reserved Vacancy models
+#
+# details:
+# * this assumes that Vacancy data has not changed often.
+# * for now, this can't remove reserved properties.
+# ** e.g. Room A was available on 07/10 yesterday, but thas has been reserved now.
+
+# TODO(yjun):
+# * remove old data ( Vacandy for past dates )
+# * Vacandy data for past ( e.g. of 2012 ) are useless so far.
+# * we may need a tool to remove such old Vacandy models.
+# ( or, Marketing team may want such old data. Need to ask them )
+
 class PropertyUpdater
   # input
   # * city: city name as string

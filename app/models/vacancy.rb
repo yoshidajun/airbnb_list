@@ -4,6 +4,9 @@ class Vacancy < ActiveRecord::Base
   belongs_to :city
   belongs_to :property
 
+  # TODO(yjun):
+  # * create VacancyList class to simplify this function.
+  # * properties/index view is too complicated now.
   def self.date_property_list(city, in_date, out_date)
     if city.class == String
       city_name = city.downcase
