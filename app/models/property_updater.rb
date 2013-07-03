@@ -6,13 +6,13 @@ class PropertyUpdater
   # input
   # * city: city name as string
   # * checkin, checkout: date as string ('%Y%m%d')
-  def self.update(city, checkin, checkout = nil)
+  def self.update(city, checkin, checkout = nil, force_update = true)
     city = city.downcase
 
-    in_date = Date.parse(checkin)
+    in_date = checkin.class == String ? Date.parse(checkin) : checkin
     out_date = 
       if checkout
-        Date.parse(checkout)
+        checkout.class == String ? Date.parse(checkout) : checkout
       else
         in_date + 1
       end
@@ -22,8 +22,14 @@ class PropertyUpdater
 
     in_date.upto(out_date - 1) do |date|
       pp date
-      property_list = find_properties(city, date, date + 1)
       city_obj = store_city(city)
+      unless force_update
+        if Vacancy.find_by_city_id_and_in_date(city_obj.id, date)
+          puts "-------------------- already stored"
+          next  # this City, Date is already scanned.
+        end
+      end
+      property_list = find_properties(city, date, date + 1)
       store_properties(city_obj, date, property_list)
     end
   end

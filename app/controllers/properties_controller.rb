@@ -4,9 +4,13 @@ class PropertiesController < ApplicationController
   def index
     # @properties = Property.all
 
-    @city_name = 'San Francisco CA'
-    @in_date = Date.parse('2013/07/09')
-    @out_date = @in_date + 60
+    @city_name = params[:location] || 'San Francisco CA'
+    @in_date = Date.parse(params[:checkin] || '2013/07/09')
+    @out_date = params[:checkout] ? Date.parse(params[:checkout]) :
+      @in_date + 30
+
+    PropertyUpdater.update(@city_name, @in_date, @out_date, false)
+
     @date_property_list, @properties =
       Vacancy.date_property_list(@city_name, @in_date, @out_date)
 
